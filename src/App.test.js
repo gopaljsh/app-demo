@@ -1,9 +1,19 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, mount, shallow } from 'enzyme';
 import App from './App';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+
+
 
 test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const wrapper = shallow(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
+  
+  expect(wrapper.render()).toMatchSnapshot();
+  //expect(linkElement).toBeInTheDocument();
 });
+
+
