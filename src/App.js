@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
-import './App.css';
 
-import Header from './header/header';
-import Sidebar from './sidebar/sidebar';
+class App extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       count: 0
+    }
+  }
 
-export default class App extends Component {
+  increment = () => {
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+  
   render() {
     return (
       <div className="app-container">
-        <Header />
-        <div className="middle-container">
-          <Sidebar />
-          <div className="content-area">Content Area</div>
-        </div>
+        <p>Current Count: {this.state.count}</p>
+        <button onClick={this.increment}>Increment Count</button>
       </div>
     )
   }
 }
+
+export default App;
