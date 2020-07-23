@@ -3,10 +3,29 @@ import { render, mount, shallow } from 'enzyme';
 import App from './App';
 
 describe('Counter check', () => {
+  const wrapper = shallow(<App />);
+  
+  it('match the snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  })
+  
   it('starts with a count of 0', () => {
-    const wrapper = shallow(<App />);
-    const countState = wrapper.state().count;
-    expect(countState).toEqual(0);
+    const text = wrapper.find('p').text();
+    expect(text).toEqual('Current Count: 0');
+  })
+
+  it('can increament the count when the button is clicked', () => {
+    const increamentBtn = wrapper.find('button.increament');
+    increamentBtn.simulate('click');
+    const text = wrapper.find('p').text();
+    expect(text).toEqual('Current Count: 1');
+  })
+
+  it('can decreament the count when the button is clicked', () => {
+    const decreamentBtn = wrapper.find('button.decreament');
+    decreamentBtn.simulate('click');
+    const text = wrapper.find('p').text();
+    expect(text).toEqual('Current Count: 0');
   })
 })
 
